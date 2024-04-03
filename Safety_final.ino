@@ -4,9 +4,9 @@
 /* Uncomment this to see the verbose Blynk protocol log */
 //#define BLYNK_DEBUG
 
-#define BLYNK_TEMPLATE_ID "TMPL3vzP2cIGb"
-#define BLYNK_TEMPLATE_NAME "Safety"
-#define BLYNK_AUTH_TOKEN "VbnagFo97jWTImmQOY6AfKnsRFMRPyF8"
+#define BLYNK_TEMPLATE_ID "ENTER_YOUR_TEMPLATE_ID"
+#define BLYNK_TEMPLATE_NAME "ENTER_YOUR_TEMPLATE_NAME"
+#define BLYNK_AUTH_TOKEN "ENTER_YOUR_AUTH_TOKEN"
 
 #define TEMPERATURE_PIN V0
 #define HUMIDITY_PIN V1
@@ -37,7 +37,7 @@ char auth[] = BLYNK_AUTH_TOKEN;
 
 TinyGPSPlus gps;
 
-EMailSender emailSend("test451972@gmail.com", "diup emku kpgf tlxw");
+EMailSender emailSend("sender@example.com", "<app_password>");
 
 DHT dht(DHTPIN, DHTTYPE);
 MAX30105 particleSensor;
@@ -57,12 +57,12 @@ double hif;
 double hic;
 
 int flag = 1;
-String latitude = "22.574422", longitude = "88.433840";
+String latitude, longitude;
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
-const char ssid[] = "Rupok";
-const char pass[] = "222@1234";
+const char ssid[] = "Wifi_name";
+const char pass[] = "Wifi_pass";
 
 BlynkTimer timer;
 
@@ -127,31 +127,6 @@ void pulse_func() {
         beatAvg += rates[x];
       beatAvg /= RATE_SIZE;
     }
-  }
-
-  if ((irValue == 0) || (irValue < 700)) {
-    beatsPerMinute = 0.00;
-    beatAvg = 0.00;
-  }
-  else if ((flag == 1)) {
-    beatsPerMinute = 76.63;
-    beatAvg = 69.855;
-    flag = 2;
-  }
-  else if ((flag == 2)) {
-    beatsPerMinute = 76.63 - 21.1;
-    beatAvg = 69.855 - 2.15;
-    flag = 3;
-  }
-  else if ((flag == 3)) {
-    beatsPerMinute = 76.63 - 11.21;
-    beatAvg = 69.855 - 1.47;
-    flag = 4;
-  }
-  else if ((flag == 4)) {
-    beatsPerMinute = 76.63 + 5.21;
-    beatAvg = 69.855 + 2.35;
-    flag = 1;
   }
 
   Blynk.virtualWrite(PULSE_PIN, beatsPerMinute);
