@@ -205,7 +205,7 @@ void sendEmail() {
   message.subject = "User Location";
   message.message = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude;
 
-  EMailSender::Response resp = emailSend.send("galaxtommy@gmail.com", message);
+  EMailSender::Response resp = emailSend.send("receiver@example.com", message);
 
   Serial.println("Sending status: ");
 
